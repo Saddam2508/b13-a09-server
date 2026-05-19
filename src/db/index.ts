@@ -12,6 +12,7 @@ export const client = new MongoClient(uri, {
   },
 });
 
+
 export const initDB = async () => {
   try {
     await client.connect();

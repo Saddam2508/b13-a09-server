@@ -14,7 +14,7 @@ const createUser = async (req: Request, res: Response) => {
       statusCode: 201,
       success: true,
       message: "User Created successfully!",
-      data: result.rows[0],
+      data: result
     });
   } catch (error: any) {
     sendResponse(res, {
@@ -27,13 +27,13 @@ const createUser = async (req: Request, res: Response) => {
 };
 
 const getAllUsers = async (req: Request, res: Response) => {
-  console.log("COntroller", req.user);
+
   try {
     const result = await userService.getAllUsersFromDB();
     res.status(200).json({
       success: true,
       message: "Users retrived successfully!",
-      data: result.rows,
+      data: result
     });
   } catch (error: any) {
     res.status(500).json({
@@ -106,8 +106,8 @@ const deleteUser = async (req: Request, res: Response) => {
   try {
     const result = await userService.deleteUserFromDB(id as string);
 
-    console.log(result);
-    if (result.rowCount === 0) {
+    
+    if (!result ) {
       res.status(404).json({
         success: false,
         message: "User Not found!",

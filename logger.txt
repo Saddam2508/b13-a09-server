@@ -381,3 +381,29 @@ Method -> GET - Time -> 1779018543687 - URL -> /api/users/
 Method -> POST - Time -> 1779020621335 - URL -> /api/users
 
 Method -> POST - Time -> 1779020626727 - URL -> /api/users
+
+Method -> GET - Time -> 1779177806708 - URL -> /api/facilites
+
+Method -> OPTIONS - Time -> 1779186565093 - URL -> /api/facilites
+
+Method -> POST - Time -> 1779186565606 - URL -> /api/facilites
+
+Method -> OPTIONS - Time -> 1779186618102 - URL -> /api/facilites
+
+Method -> POST - Time -> 1779186618106 - URL -> /api/facilites
+
+Method -> OPTIONS - Time -> 1779186685153 - URL -> /api/facilites
+
+Method -> POST - Time -> 1779186685200 - URL -> /api/facilites
+
+Method -> OPTIONS - Time -> 1779186783183 - URL -> /api/facilites
+
+Method -> POST - Time -> 1779186783205 - URL -> /api/facilites
+
+Method -> OPTIONS - Time -> 1779186821790 - URL -> /api/facilites
+
+Method -> POST - Time -> 1779186821810 - URL -> /api/facilites
+
+Method -> OPTIONS - Time -> 1779187125272 - URL -> /api/facilities
+
+Method -> POST - Time -> 1779187125277 - URL -> /api/facilities

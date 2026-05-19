@@ -10,6 +10,7 @@ import { authRoute } from "./modules/auth/auth.route";
 import { profileRoute } from "./modules/profile/profile.route";
 import { userRoute } from "./modules/user/user.route";
 import globalErrorHandler from "./middleware/globalErrorHandler";
+import { facilitiesRoute } from "./modules/facilities/facilities.route";
 const app: Application = express();
 
 app.use(CookieParser());
@@ -35,6 +36,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/users", userRoute);
 app.use("/api/profile", profileRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/facilities", facilitiesRoute);
 
 // Global Error Handling Middleware
 app.use(globalErrorHandler);
