@@ -407,3 +407,15 @@ Method -> POST - Time -> 1779186821810 - URL -> /api/facilites
 Method -> OPTIONS - Time -> 1779187125272 - URL -> /api/facilities
 
 Method -> POST - Time -> 1779187125277 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779189299540 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779189492672 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779189498127 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779189564704 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779190258814 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779190491704 - URL -> /api/facilities

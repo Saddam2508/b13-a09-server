@@ -42,6 +42,9 @@ const getAllFacilities = async (req: Request, res: Response) => {
   }
 };
 
+
+
+
 export const facilitiesController = {
   createFacilities,
   getAllFacilities

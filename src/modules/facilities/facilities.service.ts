@@ -62,7 +62,23 @@ const getAllFacilitiesFromDB = async () => {
   return allFacilities;
 };
 
+// Get Single User
+const getSingleFacilitiesFromDB = async (id: string) => {
+  const facility = await facilitiesCollection.findOne({
+    _id: new ObjectId(id),
+  });
+
+  if (!facility) {
+    throw new Error("User not found!");
+  }
+
+
+  return facility;
+};
+
+
 export const facilitiesService = {
   createFacilitiesIntoDB,
   getAllFacilitiesFromDB,
+  getSingleFacilitiesFromDB
 };
