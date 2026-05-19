@@ -70,10 +70,37 @@ const updateFacility = async (req: Request, res: Response) => {
   }
 };
 
+const deleteFacility = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const result = await facilitiesService.deleteFacilityFromDB(id as string);
+
+    
+    if (!result ) {
+      res.status(404).json({
+        success: false,
+        message: "Facility Not found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Facility deleted successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+};
 
 
 export const facilitiesController = {
   createFacilities,
   getAllFacilities, 
-  updateFacility
+  updateFacility,
+  deleteFacility
 };

@@ -495,3 +495,23 @@ Method -> PUT - Time -> 1779196630871 - URL -> /api/facilities/6a0c62565c7cb3e00
 Method -> OPTIONS - Time -> 1779196644787 - URL -> /api/facilities/6a0c62565c7cb3e00ffd8d30
 
 Method -> PUT - Time -> 1779196644793 - URL -> /api/facilities/6a0c62565c7cb3e00ffd8d30
+
+Method -> OPTIONS - Time -> 1779196922349 - URL -> /api/facilities/6a0c5c325c7cb3e00ffd8d2f
+
+Method -> PUT - Time -> 1779196922510 - URL -> /api/facilities/6a0c5c325c7cb3e00ffd8d2f
+
+Method -> GET - Time -> 1779196922654 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779197723783 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779197726477 - URL -> /api/facilities/6a0c62565c7cb3e00ffd8d30
+
+Method -> DELETE - Time -> 1779197726482 - URL -> /api/facilities/6a0c62565c7cb3e00ffd8d30
+
+Method -> GET - Time -> 1779197726555 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779197732135 - URL -> /api/facilities/6a0c3db500eee01c009e2ddb
+
+Method -> DELETE - Time -> 1779197732138 - URL -> /api/facilities/6a0c3db500eee01c009e2ddb
+
+Method -> GET - Time -> 1779197732202 - URL -> /api/facilities

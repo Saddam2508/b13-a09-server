@@ -72,14 +72,16 @@ const getSingleFacilitiesFromDB = async (id: string) => {
     throw new Error("User not found!");
   }
 
-
   return facility;
 };
 
-
 // Update User
-const updateFacilityFromDB = async (payload: Partial<IFacility>, id: string) => {
-  const {  facilityName,
+const updateFacilityFromDB = async (
+  payload: Partial<IFacility>,
+  id: string,
+) => {
+  const {
+    facilityName,
     facilityType,
     image,
     location,
@@ -87,7 +89,8 @@ const updateFacilityFromDB = async (payload: Partial<IFacility>, id: string) => 
     capacity,
     availableTimeSlots,
     description,
-    email } = payload;
+    email,
+  } = payload;
 
   const updatedData: IFacility = {
     facilityName: facilityName || "",
@@ -98,7 +101,7 @@ const updateFacilityFromDB = async (payload: Partial<IFacility>, id: string) => 
     capacity: capacity || 0,
     availableTimeSlots: availableTimeSlots || "",
     description: description || "",
-    email: email || ""
+    email: email || "",
   };
 
   await facilitiesCollection.updateOne(
@@ -115,13 +118,29 @@ const updateFacilityFromDB = async (payload: Partial<IFacility>, id: string) => 
   if (!updatedFacility) {
     throw new Error("Facility not found!");
   }
- 
+
   return updatedFacility;
+};
+
+// Delete Facility
+const deleteFacilityFromDB = async (id: string) => {
+  const result = await facilitiesCollection.deleteOne({
+    _id: new ObjectId(id),
+  });
+
+  if (!result) {
+    throw new Error("Facility not found!");
+  }
+
+  return {
+    message: "Facility deleted successfully",
+  };
 };
 
 export const facilitiesService = {
   createFacilitiesIntoDB,
   getAllFacilitiesFromDB,
   getSingleFacilitiesFromDB,
-updateFacilityFromDB
+  updateFacilityFromDB,
+  deleteFacilityFromDB,
 };
