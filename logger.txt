@@ -515,3 +515,19 @@ Method -> OPTIONS - Time -> 1779197732135 - URL -> /api/facilities/6a0c3db500eee
 Method -> DELETE - Time -> 1779197732138 - URL -> /api/facilities/6a0c3db500eee01c009e2ddb
 
 Method -> GET - Time -> 1779197732202 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199281245 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199281321 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199281417 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199281420 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199339552 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199495789 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199618826 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779199684782 - URL -> /api/facilities

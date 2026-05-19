@@ -6,8 +6,7 @@ const createFacilities = async (req: Request, res: Response) => {
   
   try {
     const result = await facilitiesService.createFacilitiesIntoDB (req.body);
-    console.log(result);
-
+    
     sendResponse(res, {
       statusCode: 201,
       success: true,
