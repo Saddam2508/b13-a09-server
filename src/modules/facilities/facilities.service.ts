@@ -62,7 +62,7 @@ const getAllFacilitiesFromDB = async () => {
   return allFacilities;
 };
 
-// Get Single User
+// Get Single facilities
 const getSingleFacilitiesFromDB = async (id: string) => {
   const facility = await facilitiesCollection.findOne({
     _id: new ObjectId(id),
@@ -77,8 +77,51 @@ const getSingleFacilitiesFromDB = async (id: string) => {
 };
 
 
+// Update User
+const updateFacilityFromDB = async (payload: Partial<IFacility>, id: string) => {
+  const {  facilityName,
+    facilityType,
+    image,
+    location,
+    pricePerHour,
+    capacity,
+    availableTimeSlots,
+    description,
+    email } = payload;
+
+  const updatedData: IFacility = {
+    facilityName: facilityName || "",
+    facilityType: facilityType || "",
+    image: image || "",
+    location: location || "",
+    pricePerHour: pricePerHour || 0,
+    capacity: capacity || 0,
+    availableTimeSlots: availableTimeSlots || "",
+    description: description || "",
+    email: email || ""
+  };
+
+  await facilitiesCollection.updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: updatedData,
+    },
+  );
+
+  const updatedFacility = await facilitiesCollection.findOne({
+    _id: new ObjectId(id),
+  });
+
+  if (!updatedFacility) {
+    throw new Error("Facility not found!");
+  }
+ 
+  return updatedFacility;
+};
+
 export const facilitiesService = {
   createFacilitiesIntoDB,
   getAllFacilitiesFromDB,
-  getSingleFacilitiesFromDB
+  getSingleFacilitiesFromDB,
+updateFacilityFromDB
 };

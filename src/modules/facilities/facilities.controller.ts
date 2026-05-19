@@ -42,10 +42,38 @@ const getAllFacilities = async (req: Request, res: Response) => {
   }
 };
 
+const updateFacility = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const result = await facilitiesService.updateFacilityFromDB(req.body, id as string);
+
+    if (!result) {
+      res.status(404).json({
+        success: false,
+        message: "Facility Not found!",
+      });
+    }
+
+    // console.log(result);
+    res.status(200).json({
+      success: true,
+      message: "Facility updated successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+};
 
 
 
 export const facilitiesController = {
   createFacilities,
-  getAllFacilities
+  getAllFacilities, 
+  updateFacility
 };

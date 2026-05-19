@@ -6,7 +6,7 @@ const router = Router();
 
 router.post("/", facilitiesController.createFacilities);
 router.get("/", facilitiesController.getAllFacilities);
-router.put("/:id", facilitiesController.getAllFacilities);
+router.put("/:id", facilitiesController.updateFacility);
 
 
 export const facilitiesRoute = router;
