@@ -531,3 +531,21 @@ Method -> GET - Time -> 1779199495789 - URL -> /api/facilities
 Method -> GET - Time -> 1779199618826 - URL -> /api/facilities
 
 Method -> GET - Time -> 1779199684782 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779266531752 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779266948966 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779266949018 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779266990981 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779267085250 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779267094613 - URL -> /api/facilities
+
+Method -> POST - Time -> 1779267096052 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779267215401 - URL -> /api/facilities
+
+Method -> POST - Time -> 1779267215406 - URL -> /api/facilities
