@@ -1,7 +1,6 @@
 import type { IFacility } from "../facilities/facilities.interface";
 
 type BookingInfo =
-  | "facilityName"
   | "image"
   | "facilityType"
   | "id"

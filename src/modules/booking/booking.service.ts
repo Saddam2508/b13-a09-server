@@ -10,6 +10,7 @@ const bookingCollection = db.collection("booking");
 // Create Booking
 const createBookingIntoDB = async (payload: IBookingPayload) => {
   const {
+    facilityName,
     user_email,
     facilityId,
     bookingDate,
@@ -22,6 +23,7 @@ const createBookingIntoDB = async (payload: IBookingPayload) => {
   // Create booking
 
   const createData = {
+    facilityName,
     user_email,
     facilityId,
     bookingDate,
@@ -67,6 +69,7 @@ const updateBookingFromDB = async (
   id: string,
 ) => {
   const {
+    facilityName,
     user_email,
     facilityId,
     bookingDate,
@@ -77,6 +80,7 @@ const updateBookingFromDB = async (
   } = payload;
 
   const updatedData: IBookingPayload = {
+    facilityName: facilityName || "",
     user_email: user_email || "",
     facilityId: facilityId || "",
     bookingDate: bookingDate || new Date(),
