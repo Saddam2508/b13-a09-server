@@ -10,31 +10,24 @@ const bookingCollection = db.collection("booking");
 // Create Booking
 const createBookingIntoDB = async (payload: IBookingPayload) => {
   const {
-    bookingId,
-    userId,
-    userImage,
-    userName,
+    user_email,
     facilityId,
-    facilityName,
+    bookingDate,
+    hours,
     availableTimeSlots,
     pricePerHour,
-    image,
-    bookingDate,
     status,
   } = payload;
 
   // Create booking
 
   const createData = {
-    userId,
-    userImage,
-    userName,
+    user_email,
     facilityId,
-    facilityName,
+    bookingDate,
+    hours,
     availableTimeSlots,
     pricePerHour,
-    image,
-    bookingDate,
     status,
     created_at: new Date(),
     updated_at: new Date(),
@@ -74,28 +67,22 @@ const updateBookingFromDB = async (
   id: string,
 ) => {
   const {
-    userId,
-    userImage,
-    userName,
+    user_email,
     facilityId,
-    facilityName,
+    bookingDate,
+    hours,
     availableTimeSlots,
     pricePerHour,
-    image,
-    bookingDate,
     status,
   } = payload;
 
   const updatedData: IBookingPayload = {
-    userId: userId || "",
-    userName: userName || "",
-    userImage: userImage || "",
+    user_email: user_email || "",
     facilityId: facilityId || "",
-    facilityName: facilityName || "",
+    bookingDate: bookingDate || new Date(),
+    hours: hours ?? 0,
     availableTimeSlots: availableTimeSlots || "",
     pricePerHour: pricePerHour || 0,
-    image: image || "",
-    bookingDate: bookingDate || new Date(),
     status: status || "pending",
   };
 

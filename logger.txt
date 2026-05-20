@@ -549,3 +549,75 @@ Method -> POST - Time -> 1779267096052 - URL -> /api/facilities
 Method -> OPTIONS - Time -> 1779267215401 - URL -> /api/facilities
 
 Method -> POST - Time -> 1779267215406 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779270258000 - URL -> /api/facilities
+
+Method -> POST - Time -> 1779270259981 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779270287763 - URL -> /api/facilities
+
+Method -> POST - Time -> 1779270287766 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779270301210 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779270305114 - URL -> /api/booking
+
+Method -> POST - Time -> 1779270305118 - URL -> /api/booking
+
+Method -> OPTIONS - Time -> 1779270439053 - URL -> /api/booking
+
+Method -> POST - Time -> 1779270439056 - URL -> /api/booking
+
+Method -> GET - Time -> 1779291505429 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779291966905 - URL -> /api/booking
+
+Method -> GET - Time -> 1779291969659 - URL -> /api/booking
+
+Method -> GET - Time -> 1779291973582 - URL -> /api/booking
+
+Method -> GET - Time -> 1779292080925 - URL -> /api/booking
+
+Method -> GET - Time -> 1779292761462 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294110270 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294203012 - URL -> /api/booking
+
+Method -> OPTIONS - Time -> 1779294208438 - URL -> /api/booking/6a0d82a11dc2814e5e9fcb1d
+
+Method -> DELETE - Time -> 1779294208459 - URL -> /api/booking/6a0d82a11dc2814e5e9fcb1d
+
+Method -> GET - Time -> 1779294208622 - URL -> /api/booking
+
+Method -> OPTIONS - Time -> 1779294210942 - URL -> /api/booking/6a0d83271dc2814e5e9fcb1e
+
+Method -> DELETE - Time -> 1779294210946 - URL -> /api/booking/6a0d83271dc2814e5e9fcb1e
+
+Method -> GET - Time -> 1779294211070 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294255205 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779294273789 - URL -> /api/facilities
+
+Method -> OPTIONS - Time -> 1779294292202 - URL -> /api/booking
+
+Method -> POST - Time -> 1779294293634 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294307225 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779294314780 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294314902 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294467801 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294646886 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294651984 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294686229 - URL -> /api/booking
+
+Method -> GET - Time -> 1779294693315 - URL -> /api/booking
+
+Method -> GET - Time -> 1779296149609 - URL -> /api/booking

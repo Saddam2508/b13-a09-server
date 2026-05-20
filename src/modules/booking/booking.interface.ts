@@ -1,6 +1,8 @@
 import type { IFacility } from "../facilities/facilities.interface";
 
 type BookingInfo =
+  | "facilityName"
+  | "image"
   | "facilityType"
   | "id"
   | "location"
@@ -10,11 +12,11 @@ type BookingInfo =
   | "_id";
 
 export type IBookingPayload = Omit<IFacility, BookingInfo> & {
-  bookingId?: string;
-  userId?: string;
-  userImage?: string;
-  userName?: string;
+  _id?: string;
   facilityId: string;
+  user_email?: string;
   bookingDate: Date | null;
+  hours?: number;
+  total_price?: string;
   status: "pending" | "fulfilled";
 };
