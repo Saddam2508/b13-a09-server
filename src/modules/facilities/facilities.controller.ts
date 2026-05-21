@@ -1,12 +1,11 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import sendResponse from "../../utility/sendResponse";
 import { facilitiesService } from "./facilities.service";
 
-const createFacilities = async (req: Request, res: Response) => {
+const createFacilities = async (req: Request, res: Response,) => {
   
   try {
-    const result = await facilitiesService.createFacilitiesIntoDB (req.body);
-    
+    const result = await facilitiesService.createFacilitiesIntoDB (req.body);  
     sendResponse(res, {
       statusCode: 201,
       success: true,
@@ -26,6 +25,7 @@ const createFacilities = async (req: Request, res: Response) => {
 const getAllFacilities = async (req: Request, res: Response) => {
 
   try {
+    
     const result = await facilitiesService.getAllFacilitiesFromDB();
     res.status(200).json({
       success: true,

@@ -7,6 +7,7 @@ const db = client.db("sports_booking");
 
 const bookingCollection = db.collection("booking");
 
+
 // Create Booking
 const createBookingIntoDB = async (payload: IBookingPayload) => {
   const {
@@ -19,6 +20,18 @@ const createBookingIntoDB = async (payload: IBookingPayload) => {
     pricePerHour,
     status,
   } = payload;
+
+  // Check existing booking
+  const existingBooking = await bookingCollection.findOne({
+    facilityId,
+    bookingDate,
+    availableTimeSlots,
+  });
+
+  if (existingBooking) {
+    throw new Error("This slot is already booked");
+  }
+
 
   // Create booking
 
