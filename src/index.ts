@@ -7,7 +7,6 @@ import express, {
 } from "express";
 import logger from "./middleware/logger";
 import { authRoute } from "./modules/auth/auth.route";
-import { profileRoute } from "./modules/profile/profile.route";
 import { userRoute } from "./modules/user/user.route";
 import globalErrorHandler from "./middleware/globalErrorHandler";
 import { facilitiesRoute } from "./modules/facilities/facilities.route";
@@ -22,7 +21,8 @@ app.use(logger);
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // ✅
+    credentials: true,
   }),
 );
 
@@ -35,7 +35,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/users", userRoute);
-app.use("/api/profile", profileRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/facilities", facilitiesRoute);
 app.use("/api/booking", bookingRoute);

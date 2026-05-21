@@ -1283,3 +1283,21 @@ Method -> DELETE - Time -> 1779373463501 - URL -> /api/facilities/6a0f1580176878
 Method -> OPTIONS - Time -> 1779373463607 - URL -> /api/facilities
 
 Method -> GET - Time -> 1779373463611 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779377934809 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779377934981 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779377935171 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779378080180 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779378154049 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779378206608 - URL -> /api/booking
+
+Method -> GET - Time -> 1779378206728 - URL -> /api/booking
+
+Method -> GET - Time -> 1779378590503 - URL -> /api/facilities
+
+Method -> GET - Time -> 1779378597053 - URL -> /api/facilities

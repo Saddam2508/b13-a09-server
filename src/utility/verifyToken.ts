@@ -1,16 +1,11 @@
 import type { NextFunction, Request, Response } from "express";
 import sendResponse from "./sendResponse";
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import config from "../config";
 
-const JWKS = createRemoteJWKSet(
-  new URL("http://localhost:3000/api/auth/jwks")
-);
+const JWKS = createRemoteJWKSet(new URL(`${config.client_uri}/api/auth/jwks`));
 
-const verifyToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
