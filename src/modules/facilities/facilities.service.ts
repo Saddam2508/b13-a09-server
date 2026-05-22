@@ -57,8 +57,18 @@ const createFacilitiesIntoDB = async (payload: IFacility) => {
 };
 
 // Get All Users
-const getAllFacilitiesFromDB = async () => {
-  const allFacilities = await facilitiesCollection.find().toArray();
+const getAllFacilitiesFromDB = async (search?: string, type?: string) => {
+  const query: Record<string, any> = {};
+
+  if (search) {
+    query.facilityName = { $regex: search, $options: "i" };
+  }
+
+  if (type) {
+    query.facilityType = { $in: [type] };
+  }
+
+  const allFacilities = await facilitiesCollection.find(query).toArray();
   return allFacilities;
 };
 
