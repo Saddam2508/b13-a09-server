@@ -5,40 +5,63 @@
    const require = createRequire(import.meta.url);
 
   
+"use strict";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 
 // src/server.ts
-import dns from "dns";
+var import_node_dns = __toESM(require("dns"), 1);
 
 // src/app.ts
-import CookieParser from "cookie-parser";
-import cors from "cors";
-import express from "express";
+var import_cookie_parser = __toESM(require("cookie-parser"), 1);
+var import_cors = __toESM(require("cors"), 1);
+var import_express5 = __toESM(require("express"), 1);
 
 // src/middleware/logger.ts
-import fs from "fs";
+var import_fs = __toESM(require("fs"), 1);
 var logger = (req, res, next) => {
   console.log("Method - URL - Time:", req.method, req.url, Date.now());
   const log = `
 Method -> ${req.method} - Time -> ${Date.now()} - URL -> ${req.url}
 `;
-  fs.appendFile("logger.txt", log, (err) => {
+  import_fs.default.appendFile("logger.txt", log, (err) => {
   });
   next();
 };
 var logger_default = logger;
 
 // src/modules/auth/auth.route.ts
-import { Router } from "express";
+var import_express = require("express");
 
 // src/modules/auth/auth.service.ts
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+var import_bcryptjs = __toESM(require("bcryptjs"), 1);
+var import_jsonwebtoken = __toESM(require("jsonwebtoken"), 1);
 
 // src/config/index.ts
-import dotenv from "dotenv";
-import path from "path";
-dotenv.config({
-  path: path.join(process.cwd(), ".env")
+var import_dotenv = __toESM(require("dotenv"), 1);
+var import_path = __toESM(require("path"), 1);
+import_dotenv.default.config({
+  path: import_path.default.join(process.cwd(), ".env")
 });
 var config = {
   connection_string: process.env.CONNECTIONSTRING,
@@ -50,11 +73,11 @@ var config = {
 var config_default = config;
 
 // src/db/index.ts
-import { MongoClient, ServerApiVersion } from "mongodb";
+var import_mongodb = require("mongodb");
 var uri = config_default.connection_string;
-var client = new MongoClient(uri, {
+var client = new import_mongodb.MongoClient(uri, {
   serverApi: {
-    version: ServerApiVersion.v1,
+    version: import_mongodb.ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true
   }
@@ -79,7 +102,7 @@ var loginUserIntoDB = async (payload) => {
   if (!userData) {
     throw new Error("Invalid Credentials!");
   }
-  const matchPassword = await bcrypt.compare(password, userData.password);
+  const matchPassword = await import_bcryptjs.default.compare(password, userData.password);
   if (!matchPassword) {
     throw new Error("Invalid Credentials!");
   }
@@ -90,10 +113,10 @@ var loginUserIntoDB = async (payload) => {
     is_active: userData.is_active,
     email: userData.email
   };
-  const accessToken = jwt.sign(jwtpayload, config_default.secret, {
+  const accessToken = import_jsonwebtoken.default.sign(jwtpayload, config_default.secret, {
     expiresIn: "1d"
   });
-  const refreshToken2 = jwt.sign(jwtpayload, config_default.refresh_secret, {
+  const refreshToken2 = import_jsonwebtoken.default.sign(jwtpayload, config_default.refresh_secret, {
     expiresIn: "10d"
   });
   return { accessToken, refreshToken: refreshToken2 };
@@ -102,7 +125,7 @@ var generateFreshToken = async (token) => {
   if (!token) {
     throw new Error("Unauthorized");
   }
-  const decoded = jwt.verify(
+  const decoded = import_jsonwebtoken.default.verify(
     token,
     config_default.refresh_secret
   );
@@ -120,7 +143,7 @@ var generateFreshToken = async (token) => {
     is_active: userData.is_active,
     email: userData.email
   };
-  const accessToken = jwt.sign(jwtpayload, config_default.secret, {
+  const accessToken = import_jsonwebtoken.default.sign(jwtpayload, config_default.secret, {
     expiresIn: "1d"
   });
   return { accessToken };
@@ -178,16 +201,16 @@ var authController = {
 };
 
 // src/modules/auth/auth.route.ts
-var router = Router();
+var router = (0, import_express.Router)();
 router.post("/login", authController.loginUser);
 router.post("/refresh-token", authController.refreshToken);
 var authRoute = router;
 
 // src/modules/user/user.route.ts
-import { Router as Router2 } from "express";
+var import_express2 = require("express");
 
 // src/middleware/auth.ts
-import jwt2 from "jsonwebtoken";
+var import_jsonwebtoken2 = __toESM(require("jsonwebtoken"), 1);
 var db2 = client.db("sports_booking");
 var userCollection2 = db2.collection("users");
 var auth = (...roles) => {
@@ -200,7 +223,7 @@ var auth = (...roles) => {
           message: "Unauthorized access!!"
         });
       }
-      const decoded = jwt2.verify(token, config_default.secret);
+      const decoded = import_jsonwebtoken2.default.verify(token, config_default.secret);
       const user = await userCollection2.findOne({
         email: decoded.email
       });
@@ -250,8 +273,8 @@ var sendResponse = (res, data) => {
 var sendResponse_default = sendResponse;
 
 // src/modules/user/user.service.ts
-import bcrypt2 from "bcryptjs";
-import { ObjectId } from "mongodb";
+var import_bcryptjs2 = __toESM(require("bcryptjs"), 1);
+var import_mongodb2 = require("mongodb");
 var db3 = client.db("sports_booking");
 var userCollection3 = db3.collection("users");
 var createUserIntoDB = async (payload) => {
@@ -260,7 +283,7 @@ var createUserIntoDB = async (payload) => {
   if (existingUser) {
     throw new Error("User already exists!");
   }
-  const hashPassword = await bcrypt2.hash(password, 10);
+  const hashPassword = await import_bcryptjs2.default.hash(password, 10);
   const createData = {
     name,
     email,
@@ -290,7 +313,7 @@ var getAllUsersFromDB = async () => {
 };
 var getSingleUserFromDB = async (id) => {
   const user = await userCollection3.findOne({
-    _id: new ObjectId(id)
+    _id: new import_mongodb2.ObjectId(id)
   });
   if (!user) {
     throw new Error("User not found!");
@@ -309,16 +332,16 @@ var updateUserFromDB = async (payload, id) => {
     updatedData.is_active = is_active;
   }
   if (password) {
-    updatedData.password = await bcrypt2.hash(password, 10);
+    updatedData.password = await import_bcryptjs2.default.hash(password, 10);
   }
   await userCollection3.updateOne(
-    { _id: new ObjectId(id) },
+    { _id: new import_mongodb2.ObjectId(id) },
     {
       $set: updatedData
     }
   );
   const updatedUser = await userCollection3.findOne({
-    _id: new ObjectId(id)
+    _id: new import_mongodb2.ObjectId(id)
   });
   if (!updatedUser) {
     throw new Error("User not found!");
@@ -328,7 +351,7 @@ var updateUserFromDB = async (payload, id) => {
 };
 var deleteUserFromDB = async (id) => {
   const result = await userCollection3.deleteOne({
-    _id: new ObjectId(id)
+    _id: new import_mongodb2.ObjectId(id)
   });
   if (result.deletedCount === 0) {
     throw new Error("User not found!");
@@ -459,7 +482,7 @@ var userController = {
 };
 
 // src/modules/user/user.route.ts
-var router2 = Router2();
+var router2 = (0, import_express2.Router)();
 router2.post("/", userController.createUser);
 router2.get(
   "/",
@@ -481,10 +504,10 @@ var globalErrorHandler = (err, req, res, next) => {
 var globalErrorHandler_default = globalErrorHandler;
 
 // src/modules/facilities/facilities.route.ts
-import { Router as Router3 } from "express";
+var import_express3 = require("express");
 
 // src/modules/facilities/facilities.service.ts
-import { ObjectId as ObjectId2 } from "mongodb";
+var import_mongodb3 = require("mongodb");
 var db4 = client.db("sports_booking");
 var facilitiesCollection = db4.collection("facilities");
 var createFacilitiesIntoDB = async (payload) => {
@@ -530,7 +553,7 @@ var getAllFacilitiesFromDB = async () => {
 };
 var getSingleFacilitiesFromDB = async (id) => {
   const facility = await facilitiesCollection.findOne({
-    _id: new ObjectId2(id)
+    _id: new import_mongodb3.ObjectId(id)
   });
   if (!facility) {
     throw new Error("User not found!");
@@ -561,13 +584,13 @@ var updateFacilityFromDB = async (payload, id) => {
     email: email || ""
   };
   await facilitiesCollection.updateOne(
-    { _id: new ObjectId2(id) },
+    { _id: new import_mongodb3.ObjectId(id) },
     {
       $set: updatedData
     }
   );
   const updatedFacility = await facilitiesCollection.findOne({
-    _id: new ObjectId2(id)
+    _id: new import_mongodb3.ObjectId(id)
   });
   if (!updatedFacility) {
     throw new Error("Facility not found!");
@@ -576,7 +599,7 @@ var updateFacilityFromDB = async (payload, id) => {
 };
 var deleteFacilityFromDB = async (id) => {
   const result = await facilitiesCollection.deleteOne({
-    _id: new ObjectId2(id)
+    _id: new import_mongodb3.ObjectId(id)
   });
   if (!result) {
     throw new Error("Facility not found!");
@@ -682,11 +705,11 @@ var facilitiesController = {
 };
 
 // src/utility/verifyToken.ts
-import { createRemoteJWKSet, jwtVerify } from "jose";
-var JWKS = createRemoteJWKSet(new URL(`${config_default.client_uri}/api/auth/jwks`));
+var import_jose = require("jose");
+var JWKS = (0, import_jose.createRemoteJWKSet)(new URL(`${config_default.client_uri}/api/auth/jwks`));
 
 // src/modules/facilities/facilities.route.ts
-var router3 = Router3();
+var router3 = (0, import_express3.Router)();
 router3.post("/", facilitiesController.createFacilities);
 router3.get("/", facilitiesController.getAllFacilities);
 router3.put("/:id", facilitiesController.updateFacility);
@@ -694,10 +717,10 @@ router3.delete("/:id", facilitiesController.deleteFacility);
 var facilitiesRoute = router3;
 
 // src/modules/booking/booking.route.ts
-import { Router as Router4 } from "express";
+var import_express4 = require("express");
 
 // src/modules/booking/booking.service.ts
-import { ObjectId as ObjectId3 } from "mongodb";
+var import_mongodb4 = require("mongodb");
 var db5 = client.db("sports_booking");
 var bookingCollection = db5.collection("booking");
 var createBookingIntoDB = async (payload) => {
@@ -743,7 +766,7 @@ var getAllBookingFromDB = async () => {
 };
 var getSingleBookingFromDB = async (id) => {
   const booking = await bookingCollection.findOne({
-    _id: new ObjectId3(id)
+    _id: new import_mongodb4.ObjectId(id)
   });
   if (!booking) {
     throw new Error("booking not found!");
@@ -772,13 +795,13 @@ var updateBookingFromDB = async (payload, id) => {
     status: status || "pending"
   };
   await bookingCollection.updateOne(
-    { _id: new ObjectId3(id) },
+    { _id: new import_mongodb4.ObjectId(id) },
     {
       $set: updatedData
     }
   );
   const updatedBooking = await bookingCollection.findOne({
-    _id: new ObjectId3(id)
+    _id: new import_mongodb4.ObjectId(id)
   });
   if (!updatedBooking) {
     throw new Error("Facility not found!");
@@ -787,7 +810,7 @@ var updateBookingFromDB = async (payload, id) => {
 };
 var deleteBookingFromDB = async (id) => {
   const result = await bookingCollection.deleteOne({
-    _id: new ObjectId3(id)
+    _id: new import_mongodb4.ObjectId(id)
   });
   if (!result) {
     throw new Error("Booking not found!");
@@ -896,7 +919,7 @@ var bookingController = {
 };
 
 // src/modules/booking/booking.route.ts
-var router4 = Router4();
+var router4 = (0, import_express4.Router)();
 router4.post("/", bookingController.createBooking);
 router4.get("/", bookingController.getAllBooking);
 router4.put("/:id", bookingController.updateBooking);
@@ -904,14 +927,14 @@ router4.delete("/:id", bookingController.deleteBooking);
 var bookingRoute = router4;
 
 // src/app.ts
-var app = express();
-app.use(CookieParser());
-app.use(express.json());
-app.use(express.text());
-app.use(express.urlencoded({ extended: true }));
+var app = (0, import_express5.default)();
+app.use((0, import_cookie_parser.default)());
+app.use(import_express5.default.json());
+app.use(import_express5.default.text());
+app.use(import_express5.default.urlencoded({ extended: true }));
 app.use(logger_default);
 app.use(
-  cors({
+  (0, import_cors.default)({
     origin: process.env.CLIENT_URL || "http://localhost:3000",
     // ✅
     credentials: true
@@ -931,7 +954,7 @@ app.use(globalErrorHandler_default);
 var app_default = app;
 
 // src/server.ts
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+import_node_dns.default.setServers(["8.8.8.8", "8.8.4.4"]);
 var main = async () => {
   await initDB();
   app_default.listen(config_default.port, () => {
@@ -939,4 +962,4 @@ var main = async () => {
   });
 };
 main();
-//# sourceMappingURL=server.js.map
+//# sourceMappingURL=server.cjs.map
