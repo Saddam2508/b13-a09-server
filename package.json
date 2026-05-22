@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "tsx watch ./src/server.ts",
-    "build": "tsup"
+    "start": "node init && node dist/server.js",
+    "dev": "node init && tsx watch ./src/server.ts",
+    "build": "node init && tsup"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "jose": "^6.2.3",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.2.0",
+    "node-fetch": "^3.3.2",
     "pg": "^8.20.0",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0"

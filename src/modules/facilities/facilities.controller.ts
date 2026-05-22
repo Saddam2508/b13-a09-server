@@ -2,15 +2,14 @@ import type { NextFunction, Request, Response } from "express";
 import sendResponse from "../../utility/sendResponse";
 import { facilitiesService } from "./facilities.service";
 
-const createFacilities = async (req: Request, res: Response,) => {
-  
+const createFacilities = async (req: Request, res: Response) => {
   try {
-    const result = await facilitiesService.createFacilitiesIntoDB (req.body);  
+    const result = await facilitiesService.createFacilitiesIntoDB(req.body);
     sendResponse(res, {
       statusCode: 201,
       success: true,
       message: "facility Created successfully!",
-      data: result
+      data: result,
     });
   } catch (error: any) {
     sendResponse(res, {
@@ -23,14 +22,15 @@ const createFacilities = async (req: Request, res: Response,) => {
 };
 
 const getAllFacilities = async (req: Request, res: Response) => {
-
   try {
-    
-    const result = await facilitiesService.getAllFacilitiesFromDB();
+    const search = req.query.search as string | undefined;
+    const type = req.query.type as string | undefined;
+
+    const result = await facilitiesService.getAllFacilitiesFromDB(search, type);
     res.status(200).json({
       success: true,
       message: "Users retrived successfully!",
-      data: result
+      data: result,
     });
   } catch (error: any) {
     res.status(500).json({
@@ -45,7 +45,10 @@ const updateFacility = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const result = await facilitiesService.updateFacilityFromDB(req.body, id as string);
+    const result = await facilitiesService.updateFacilityFromDB(
+      req.body,
+      id as string,
+    );
 
     if (!result) {
       res.status(404).json({
@@ -74,8 +77,7 @@ const deleteFacility = async (req: Request, res: Response) => {
   try {
     const result = await facilitiesService.deleteFacilityFromDB(id as string);
 
-    
-    if (!result ) {
+    if (!result) {
       res.status(404).json({
         success: false,
         message: "Facility Not found!",
@@ -96,10 +98,9 @@ const deleteFacility = async (req: Request, res: Response) => {
   }
 };
 
-
 export const facilitiesController = {
   createFacilities,
-  getAllFacilities, 
+  getAllFacilities,
   updateFacility,
-  deleteFacility
+  deleteFacility,
 };

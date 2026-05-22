@@ -61,9 +61,12 @@ var client = new MongoClient(uri, {
 });
 var initDB = async () => {
   try {
+    await client.connect();
+    const result = await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
+    return result;
   } catch (error) {
     console.log(error);
   } finally {
@@ -524,8 +527,15 @@ var createFacilitiesIntoDB = async (payload) => {
   });
   return facilities;
 };
-var getAllFacilitiesFromDB = async () => {
-  const allFacilities = await facilitiesCollection.find().toArray();
+var getAllFacilitiesFromDB = async (search, type) => {
+  const query = {};
+  if (search) {
+    query.facilityName = { $regex: search, $options: "i" };
+  }
+  if (type) {
+    query.facilityType = { $in: [type] };
+  }
+  const allFacilities = await facilitiesCollection.find(query).toArray();
   return allFacilities;
 };
 var getSingleFacilitiesFromDB = async (id) => {
@@ -614,7 +624,9 @@ var createFacilities = async (req, res) => {
 };
 var getAllFacilities = async (req, res) => {
   try {
-    const result = await facilitiesService.getAllFacilitiesFromDB();
+    const search = req.query.search;
+    const type = req.query.type;
+    const result = await facilitiesService.getAllFacilitiesFromDB(search, type);
     res.status(200).json({
       success: true,
       message: "Users retrived successfully!",
@@ -631,7 +643,10 @@ var getAllFacilities = async (req, res) => {
 var updateFacility = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await facilitiesService.updateFacilityFromDB(req.body, id);
+    const result = await facilitiesService.updateFacilityFromDB(
+      req.body,
+      id
+    );
     if (!result) {
       res.status(404).json({
         success: false,
@@ -684,13 +699,42 @@ var facilitiesController = {
 // src/utility/verifyToken.ts
 import { createRemoteJWKSet, jwtVerify } from "jose";
 var JWKS = createRemoteJWKSet(new URL(`${config_default.client_uri}/api/auth/jwks`));
+var verifyToken = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return sendResponse_default(res, {
+      statusCode: 401,
+      success: false,
+      message: "Unauthorized"
+    });
+  }
+  const token = authHeader.split(" ")[1];
+  if (!token) {
+    return sendResponse_default(res, {
+      statusCode: 401,
+      success: false,
+      message: "Unauthorized"
+    });
+  }
+  try {
+    const { payload } = await jwtVerify(token, JWKS);
+    next();
+  } catch (error) {
+    return sendResponse_default(res, {
+      statusCode: 403,
+      success: false,
+      message: "Forbidden"
+    });
+  }
+};
+var verifyToken_default = verifyToken;
 
 // src/modules/facilities/facilities.route.ts
 var router3 = Router3();
-router3.post("/", facilitiesController.createFacilities);
+router3.post("/", verifyToken_default, facilitiesController.createFacilities);
 router3.get("/", facilitiesController.getAllFacilities);
-router3.put("/:id", facilitiesController.updateFacility);
-router3.delete("/:id", facilitiesController.deleteFacility);
+router3.put("/:id", verifyToken_default, facilitiesController.updateFacility);
+router3.delete("/:id", verifyToken_default, facilitiesController.deleteFacility);
 var facilitiesRoute = router3;
 
 // src/modules/booking/booking.route.ts
@@ -897,10 +941,10 @@ var bookingController = {
 
 // src/modules/booking/booking.route.ts
 var router4 = Router4();
-router4.post("/", bookingController.createBooking);
-router4.get("/", bookingController.getAllBooking);
-router4.put("/:id", bookingController.updateBooking);
-router4.delete("/:id", bookingController.deleteBooking);
+router4.post("/", verifyToken_default, bookingController.createBooking);
+router4.get("/", verifyToken_default, bookingController.getAllBooking);
+router4.put("/:id", verifyToken_default, bookingController.updateBooking);
+router4.delete("/:id", verifyToken_default, bookingController.deleteBooking);
 var bookingRoute = router4;
 
 // src/app.ts
